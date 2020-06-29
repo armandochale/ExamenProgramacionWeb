@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Examen Programacion Web</title>
+        <meta charset="utf-8" />
+        <meta name ="author" content="Jesús Armando Chalé Ciau">
+        <meta name ="description" content="Ejercicio para crear tablas a base de archivos CSV">
+        <meta name ="keys" content="button, javascript, table, jquery, ajax">
+        <link rel="stylesheet" type="text/css" href="appEx.css">
+        <style>
+            th{
+                border-color: #666666;
+                background-color: #ce0aff;
+            }
+            td{
+                border-color: #2c1c1c;
+            }
+            tr:nth-of-type(2n+3){
+                background-color: rgb(0, 255, 234);
+                color:rgb(238, 67, 67);
+                font-family:sans-serif;
+            }
+            tr:nth-of-type(2n+2){
+                background-color: rgb(247, 103, 204);
+                font-family:Verdana, Geneva, Tahoma, sans-serif;
+            }
+            
+        </style>
+    </head>
+
+<body style="background-color: midnightblue;">
+  <div id="buttondiv">
+    <input type="file" id="buttonobtener" />
+    <input type="button" id="buttonimport" value="Importar el archivo" />
+    <br><br>
+  </div>
+  <div class="container" id="container">
+    <table class="gridtable" id="tabla">
+        
+        <thead>
+          <tr class="tableheader">
+            
+          </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+      </table>
+  </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script>
+    $( document ).ready(function() {
+
+        $('#buttonimport').click(function () {
+
+            let var1 = document.getElementById("buttonobtener").value;
+           
+            if(var1.slice(var1.length-4,var1.length)==".csv"){
+                var table = document.getElementById("tabla");
+                table.innerHTML = "";
+    
+            var filerd = new FileReader();
+            filerd.onload = function (func) {
+              //las filas en el array
+              var therows = func.target.result.split("\n");
+              //loop en las filas
+              for (var row = 0; row < therows.length; row ++ ) {
+                var columnas = therows[row].split(",");
+                var colcount = columnas.length;
+                console.log(colcount);
+                var newrow="<tr><th>" + columnas[0] + "</th>";
+                if(row==0){
+                    for(var i=1;i<colcount;i++){
+                        newrow=newrow+("<th>" + columnas[i] + "</th>");
+                    }
+                    newrow=newrow+"</tr>"
+                }else{
+                    newrow="<tr><td>" + columnas[0] + "</td>";
+                    for(var i=1;i<colcount;i++){
+                        newrow=newrow+("<td>" + columnas[i] + "</td>");
+                    }
+                }
+                
+                
+
+                $('#tabla').append(newrow);
+              }
+            }
+            filerd.readAsText($("#buttonobtener")[0].files[0]);
+        }else{
+            alert("No encuentro el archivo .csv");
+            console.log("No se ingreso archivo o se ingreso archivo que no es csv")
+        }
+        });
+        
+    });
+    </script>
+
+    </body>
+</html>

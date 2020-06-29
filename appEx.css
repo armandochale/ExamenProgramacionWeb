@@ -1,0 +1,29 @@
+#container,#buttondiv{
+    margin:0 auto;
+    width:50%;
+    overflow:auto;
+    color: mintcream;
+}
+table.gridtable {
+    margin:0 auto;
+    width:95%;
+    overflow:auto;
+    font-family: helvetica,arial,sans-serif;
+    font-size:14px;
+    color:#000000;
+    border-width: 5px;
+    border-color: #666666;
+    border-collapse: collapse;
+    text-align: center;
+}
+table.gridtable th {
+    border-width: 1px;
+    padding: 8px;
+    border-style:solid;
+    
+}
+table.gridtable td {
+    border-width: 1px;
+    padding: 8px;
+    border-style: solid;
+}
